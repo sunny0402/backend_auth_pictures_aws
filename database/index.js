@@ -10,14 +10,14 @@ const Sequelize = require("sequelize");
 
 const my_db_connection_instance = new Sequelize(
   // For Deployment:
-  // process.env.DB_NAME,
-  // process.env.USERNAME,
-  // process.env.PASSWORD,
+  process.env.DB_NAME,
+  process.env.USERNAME,
+  process.env.PASSWORD,
 
   //For local development:
-  "test_auth_images_local_db",
-  "root",
-  "",
+  // "test_auth_images_local_db",
+  // "root",
+  // "",
   {
     // For deployment: host: process.env.HOST,
     //For local development: host: "localhost"
