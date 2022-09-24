@@ -1,4 +1,8 @@
 ## About
 
-"npm": "8.5.1",
-"node": "14.18.1"
+Backend has the following routes for authentication:
+
+/register, /auth, /refresh, /logout
+
+And a authorized route for registered users:
+/users/:id
