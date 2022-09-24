@@ -22,14 +22,14 @@ const my_db_connection_instance = new Sequelize(
     // For deployment: host: process.env.HOST,
     //For local development: host: "localhost"
     host: "localhost",
-    // port: "3306",
+    port: "3306",
     dialect: "mysql",
-    // pool: {
-    //   max: 5,
-    //   min: 0,
-    //   acquire: 30000,
-    //   idle: 10000,
-    // },
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
     // can set global options here
     // define: {
     //   freezeTableName: true,

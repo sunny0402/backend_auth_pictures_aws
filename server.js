@@ -88,7 +88,6 @@ if (process.env.NODE_ENV === "production") {
 // AUTH ROUTES
 app.use("/register", require("./routes/register"));
 app.use("/auth", require("./routes/auth"));
-//Note: refresh route receives refresh token in cookie
 app.use("/refresh", require("./routes/refresh"));
 app.use("/logout", require("./routes/logout"));
 
@@ -103,9 +102,9 @@ app.all("*", (req, res) => {
   res.status(404);
   if (req.accepts("html")) {
     //TODO: For production:
-    // res.sendFile(path.join(__dirname + "../frontends/build/index.html"));
+    res.sendFile(path.join(__dirname + "../frontends/build/index.html"));
     //For dev:
-    res.sendFile(path.join(__dirname + "/views/404.html"));
+    // res.sendFile(path.join(__dirname + "/views/404.html"));
   } else if (req.accepts("json")) {
     res.json({ error: "404 Not Found" });
   } else {
