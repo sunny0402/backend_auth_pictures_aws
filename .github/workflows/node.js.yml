@@ -25,11 +25,12 @@ jobs:
         cache: "npm"
       - run: npm ci
       - run: npm run build --if-present
-      - name: Restart PM2
 
       - name: Create .env file
         uses: SpicyPizza/create-envfile@v1.3.0
         with:
         file_name: .env
         directory: /home/ubuntu/app_backend/\_work/backend_auth_pictures_aws/backend_auth_pictures_aws
+
+      - name: Restart PM2
       - run: sudo pm2 restart app_backend_process
