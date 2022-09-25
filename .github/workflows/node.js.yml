@@ -33,7 +33,7 @@ jobs:
         run: npm run build --if-present
 
       - name: Create .env file step
-        uses: SpicyPizza/create-envfile@v1.3.0
+        uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
           envkey_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -45,5 +45,8 @@ jobs:
           envkey_PASSWORD: ${{ secrets.PASSWORD }}
           envkey_REFRESH_TOKEN_SECRET: ${{ secrets.REFRESH_TOKEN_SECRET }}
           envkey_USERNAME: ${{ secrets.USERNAME }}
+          directory: home/ubuntu/app_backend/\_work/backend_auth_pictures_aws/backend_auth_pictures_aws
+          file_name: .env
+          fail_on_empty: false
       - name: Restart PM2 step
         run: sudo pm2 restart app_backend_process
