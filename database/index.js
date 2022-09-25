@@ -21,8 +21,8 @@ const my_db_connection_instance = new Sequelize(
   {
     // For deployment: host: process.env.HOST,
     //For local development: host: "localhost"
-    host: "localhost",
-    port: "3306",
+    host: process.env.HOST,
+    port: process.env.PORT,
     dialect: "mysql",
     pool: {
       max: 5,

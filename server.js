@@ -26,13 +26,15 @@ const port = process.env.PORT || 5000;
 
 async function database_start() {
   try {
-    //Note: for production remove force:true simply await my_db.my_db_connection_instance.sync();
+    //Note: for production remove force:true
+    //      simply await my_db.my_db_connection_instance.sync();
     //Note: uploaded sql file to EC2 instance to initialize database
+    //Note: For production sqp file already uploaded to server.
+    //Note: Username, password are located in .env file in backend. Makre sure is is there!
 
     await my_db.my_db_connection_instance.authenticate();
+    await my_db.my_db_connection_instance.sync();
     console.log("Connection to the database successful!");
-
-    // await my_db.my_db_connection_instance.sync({ force: true });
 
     // const userRole = await Role.create({
     //   role_name: "User",
@@ -44,20 +46,21 @@ async function database_start() {
     //   role_id: 5150,
     // });
 
-    //create Alex1 with roles of User and Admin
-    // const hashedPwdAlex1 = await bcrypt.hash("1234", 10);
-    // const alex1 = await User.create({
-    //   userEmail: "alex1@gmail.com",
-    //   password: hashedPwdAlex1,
-    //   imageTitle: "178722cf-6368-4e12-9edd-81904b7259c4.jpg",
-    //   s3URL:
-    //     "https://user-images-s3-storage.s3.us-east-2.amazonaws.com/178722cf-6368-4e12-9edd-81904b7259c4.jpg",
-    // });
+    //create Alex2 with roles of User and Admin
+    const hashedPwdAlex2 = await bcrypt.hash("12345", 10);
+    const alex2 = await User.create({
+      userEmail: "alex2@gmail.com",
+      password: hashedPwdAlex2,
+      imageTitle: "178722cf-6368-4e12-9edd-81904b7259c4.jpg",
+      s3URL:
+        "https://user-images-s3-storage.s3.us-east-2.amazonaws.com/178722cf-6368-4e12-9edd-81904b7259c4.jpg",
+    });
 
-    // const alex1Id = alex1.dataValues.id;
-    // const userRoleAlex1 = await roleController.addUser(2001, alex1Id);
-    // const adminRoleAlex1 = await roleController.addUser(5150, alex1Id);
+    const alex2Id = alex2.dataValues.id;
+    const userRoleAlex1 = await roleController.addUser(2001, alex2Id);
+    const adminRoleAlex1 = await roleController.addUser(5150, alex2Id);
 
+    console.log("Test user alex2 created: ", alex2.dataValues);
     console.log("Database startup complete!");
   } catch (err) {
     if (err.name === "SequelizeValidationError") {
