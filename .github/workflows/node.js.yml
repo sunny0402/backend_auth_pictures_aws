@@ -16,38 +16,20 @@ jobs:
         node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:      
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-      node-version: ${{ matrix.node-version }}
-      cache: "npm"
-    - run: npm ci
-    - run: npm run build --if-present
-    - name: Create .env file
-      env:
-        ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_REGION: ${{ secrets.AWS_REGION }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        DB_NAME: ${{ secrets.DB_NAME }}
-        HOST: ${{ secrets.HOST }}
-        NODE_ENV: ${{ secrets.NODE_ENV }}
-        PASSWORD: ${{ secrets.PASSWORD }}
-        REFRESH_TOKEN_SECRET: ${{ secrets.REFRESH_TOKEN_SECRET }}
-        USERNAME: ${{ secrets.USERNAME }}
-    - run: |
-      touch .env
-      echo "$ACCESS_TOKEN_SECRET" > .env
-      echo "$AWS_ACCESS_KEY_ID " > .env
-      echo "$AWS_REGION"> .env
-      echo $AWS_SECRET_ACCESS_KEY > .env
-      echo $DB_NAME > .env
-      echo $HOST > .env
-      echo $PASSWORD > .env
-      echo $REFRESH_TOKEN_SECRET > .env
-      echo $USERNAME > .env
-    - shell: bash
-    - name: Restart PM2
-    - run: sudo pm2 restart app_backend_process
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+        node-version: ${{ matrix.node-version }}
+        cache: "npm"
+      - run: npm ci
+      - run: npm run build --if-present
+      - name: Restart PM2
+
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v1.3.0
+        with:
+        file_name: .env
+        directory: /home/ubuntu/app_backend/\_work/backend_auth_pictures_aws/backend_auth_pictures_aws
+      - run: sudo pm2 restart app_backend_process
