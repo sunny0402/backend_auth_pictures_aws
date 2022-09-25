@@ -34,9 +34,9 @@ jobs:
 
       - name: Create .env file step
         uses: SpicyPizza/create-envfile@v1.3.0
-        file_name: .env
-        directory: /home/ubuntu/app_backend/\_work/backend_auth_pictures_aws/backend_auth_pictures_aws
         with:
+          file_name: .env
+          directory: /home/ubuntu/app_backend/\_work/backend_auth_pictures_aws/backend_auth_pictures_aws
           ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
