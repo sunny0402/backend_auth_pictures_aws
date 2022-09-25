@@ -17,17 +17,17 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/checkout@v3
         uses: actions/setup-node@v3
         with:
         node-version: ${{ matrix.node-version }}
         cache: "npm"
-      - run: npm ci
-      - run: npm run build --if-present
+        run: npm ci
+        run: npm run build --if-present
 
       - name: Create .env file
-      - uses: SpicyPizza/create-envfile@v1.3.0
+        uses: SpicyPizza/create-envfile@v1.3.0
         file_name: .env
         directory: /home/ubuntu/app_backend/\_work/backend_auth_pictures_aws/backend_auth_pictures_aws
         with:
@@ -43,4 +43,4 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
 
       - name: Restart PM2
-      - run: sudo pm2 restart app_backend_process
+        run: sudo pm2 restart app_backend_process
