@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const handleLogin = async (req, res) => {
+  console.log(">>>DEBUG: authController: req.body", req.body);
   const { email, pwd } = req.body;
   if (!email || !pwd)
     return res.status(400).json({
@@ -61,14 +62,14 @@ const handleLogin = async (req, res) => {
       }
     );
 
-    //Note: send refresh token as a cookie
+    //Note: send refresh token as an http only cookie
     //Note: if testing refresh endpoint with postman... comment out secure: true
 
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       sameSite: "None",
-      // TODO: uncomment for production
-      secure: true,
+      // TODO: uncomment for production if using https
+      //secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
     //Note: send authorization roles and access token to user and userID

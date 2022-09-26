@@ -11,7 +11,6 @@ const handleLogout = async (req, res) => {
   const refreshToken = cookies.jwt;
 
   // is refresh token in database ... user with such a token
-  // MONGO: const foundUser = await User.findOne({ refreshToken: refreshToken }).exec();
   const foundUser = await User.findOne({
     where: { refreshToken: refreshToken },
     include: {
@@ -21,11 +20,10 @@ const handleLogout = async (req, res) => {
 
   //no user with cookie, but suck a cookie exists
   if (!foundUser) {
-    //TODO: uncomment secure:true for production
     res.clearCookie("jwt", {
       httpOnly: true,
       sameSite: "None",
-      secure: true,
+      // secure: true,
     });
     res.sendStatus(204); //successful but no content
   }
@@ -47,11 +45,11 @@ const handleLogout = async (req, res) => {
   console.log(">>> DEBUG: lougoutController: result: ", result);
 
   //Note: when deleteing cookie specify same properties it was initialized with except maxAge: 24 * 60 * 60 * 1000
-  //secure: true - only serves on https
+  //Note: secure: true - only serves on https
   res.clearCookie("jwt", {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
+    // secure: true,
   });
   res.sendStatus(204);
 };

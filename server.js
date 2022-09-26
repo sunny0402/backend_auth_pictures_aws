@@ -22,7 +22,9 @@ const roleController = require("./controllers/rolesController");
 let my_db = require("./database");
 const { User, Role } = my_db.models;
 
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
+const port =
+  process.env.NODE_ENV === "production" ? process.env.PORT || 80 : 5000;
 
 async function database_start() {
   try {
