@@ -91,16 +91,16 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // AUTH ROUTES
-app.use("/register", require("./routes/register"));
-app.use("/auth", require("./routes/auth"));
-app.use("/refresh", require("./routes/refresh"));
-app.use("/logout", require("./routes/logout"));
+app.use("/api/register", require("./routes/register"));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/refresh", require("./routes/refresh"));
+app.use("/api/logout", require("./routes/logout"));
 
 // Note: Require JWT only after register or login. Every route after will use verifyJWT.
 //Note: Applied verifyJWT directly in routes/api/users.js
 // app.use(verifyJWT);
 
-app.use("/users", require("./routes/api/users"));
+app.use("/api/users", require("./routes/api/users"));
 
 app.all("*", (req, res) => {
   res.status(404);
