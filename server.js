@@ -98,8 +98,7 @@ app.use("/logout", require("./routes/logout"));
 
 // Note: Require JWT only after register or login. Every route after will use verifyJWT.
 //Note: Applied verifyJWT directly in routes/api/users.js
-
-app.use(verifyJWT);
+// app.use(verifyJWT);
 
 app.use("/users", require("./routes/api/users"));
 

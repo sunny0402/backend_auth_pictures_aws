@@ -9,7 +9,7 @@ const verifyJWT = require("../../middleware/verifyJWT");
 router
   .route("/:id")
   //TODO: test applyig verifyJWT in server file
-  // .get(verifyJWT, verifyRoles(ROLES_LIST.User), usersController.getUser);
-  .get(verifyRoles(ROLES_LIST.User), usersController.getUser);
+  .get(verifyJWT, verifyRoles(ROLES_LIST.User), usersController.getUser);
+// .get(verifyRoles(ROLES_LIST.User), usersController.getUser);
 
 module.exports = router;
