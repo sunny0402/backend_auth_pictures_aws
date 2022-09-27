@@ -77,7 +77,8 @@ async function database_start() {
 database_start();
 
 app.use(credentials);
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
